@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2rPn2KX3smbe_H3HfqbSW8vU1Wrz_VfU&callback=initMap">
+    </script>
+
+    <script type='text/javascript' src='knockout-3.4.2.js'></script>
+
+        <script async src="MApp.js"></script>
+
+  
+
+    <style>
+       #map {
+        height: 500px;
+        width: 100%;
+       }
+    </style>
+  </head>
+  <body>
+    <h3>My Neighborhood</h3>
+   
+ <div id="search">
+     <input data-bind="value: query, valueUpdate: 'keyup'" autocomplete="off" type="text" class="form-control" placeholder="Filter Locations">
+
+        <ul data-bind="foreach: filterPins" class="nav navbar-nav" class=" nav navbar-nav">
+            <li class="active">
+                <a data-bind="text: name"></a>
+    </div>
+
+    <div id="map"></div>
+
+
+   <!--  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2rPn2KX3smbe_H3HfqbSW8vU1Wrz_VfU&callback=initMap">
+    </script>
+    <script async src="MApp.js"></script>
+    <script type='text/javascript' src='knockout-3.4.2.js'></script> -->
+
+  </body>
+</html>
