@@ -8,13 +8,13 @@
 
 //Model:
 
-var Pin = function Pin(map, name, position, text) {
+var Pin = function Pin(map, name, position, text, streetview) {
   var marker;
 
   this.name = ko.observable(name);
   this.position = ko.observable(position);
   this.text = ko.observable(text);
-
+  this.streetView = ko.observable(streetview);
   marker = new google.maps.Marker({
     position: position,//new google.maps.LatLng(lat, lon),
     animation: google.maps.Animation.DROP
@@ -55,16 +55,18 @@ var markers = [
      {
         name: "Our Apartment",
         position: {lat: 40.779345, lng: -73.980686},
-        // lat: 40.779345,
-        // long: -73.980686,
+        lat: 40.779345,
+        long: -73.980686,
+        streetView: "https://maps.googleapis.com/maps/api/streetview?size=600x300&location=40.779345,-73.980686&heading=1&pitch=-0.75&scale=2&key=AIzaSyATolub07wwdNH-A_gYvcjBVB9W7m_ovdM",
         map: map,
         text: ""
         },
      {
         name: "boxKite",
         position: {lat: 40.777625, lng: -73.980028},
-        // lat: 40.777625,
-        // long: -73.980028,
+        lat: 40.777625,
+        long: -73.980028,
+        streetView: "https://maps.googleapis.com/maps/api/streetview?size=600x300&location=40.777625,-73.980028&heading=1&pitch=-0.75&&scale=1key=AIzaSyATolub07wwdNH-A_gYvcjBVB9W7m_ovdM",
         map: map,
         text: ""
     },
@@ -72,8 +74,9 @@ var markers = [
     {
         name: "AMC Lincoln Center 13",
         position: {lat: 40.774975, lng: -73.981640},
-        // lat: 40.774975,
-        // long: -73.981640,
+        lat: 40.774975,
+        long: -73.981640,
+        streetView: "https://maps.googleapis.com/maps/api/streetview?size=600x300&location=40.774975,-73.981640&heading=1&pitch=-0.75&key=AIzaSyATolub07wwdNH-A_gYvcjBVB9W7m_ovdM",
         map: map,
         text: ""
     }];
@@ -98,7 +101,7 @@ function viewModel() {
 
 
         for (var x = 0; x < markers.length; x++){
-            var pin = new Pin(map, markers[x].name, markers[x].position, markers[x].text); 
+            var pin = new Pin(map, markers[x].name, markers[x].position, markers[x].text, markers[x].streetView); 
             self.koMarkers.push(pin);
         } ;  
       }

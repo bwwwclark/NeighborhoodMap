@@ -4,11 +4,11 @@
     <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2rPn2KX3smbe_H3HfqbSW8vU1Wrz_VfU&callback=initMap">
     </script>
+    <script type = 'text/javascript' src='jquery-3.2.1.js'></script>
 
     <script type='text/javascript' src='knockout-3.4.2.js'></script>
 
         <script async src="MApp.js"></script>
-
   
 
     <style>
@@ -26,10 +26,18 @@
 
         <ul data-bind="foreach: filterPins" class="nav navbar-nav" class=" nav navbar-nav">
             <li class="active">
-                <a data-bind="text: name"></a>
+                <a data-bind="text: name"></a></li>
+                <img  data-bind="attr:{src: streetView}" />  
+                <!-- <img data-bind"attr:{src: streetview}"/> -->
     </div>
 
     <div id="map"></div>
+    <div>
+    <img src ="https://maps.googleapis.com/maps/api/streetview?size=600x300&location=40.779345,-73.980686&heading=1&pitch=-0.75&key=AIzaSyATolub07wwdNH-A_gYvcjBVB9W7m_ovdM">
+    </div>
+ <div>
+  <!-- <img width="16px" height="16px" data-bind="attr : {src: imagePath}" /> -->
+    </div>
 
 
    <!--  <script
