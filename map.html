@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
   <head>
     <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2rPn2KX3smbe_H3HfqbSW8vU1Wrz_VfU&callback=initMap">
@@ -9,18 +10,29 @@
     <script type='text/javascript' src='knockout-3.4.2.js'></script>
 
         <script async src="MApp.js"></script>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+
+<script src="js/bootstrap.min.js"></script>
   
 
     <style>
        #map {
-        height: 500px;
+        height: 700px;
         width: 100%;
        }
     </style>
   </head>
   <body>
-    <h3>My Neighborhood</h3>
-   
+    
+    <!--  <form id="form-container" class="form-container">
+        <label for="street">Street: </label><input type="text" id="street" value="">
+        <label for="city">City: </label><input type="text" id="city" value="">
+        <button id="submit-btn">Submit</button>
+    </form> -->
+<div class="container">
+<h3>My Neighborhood</h3>
+  <div class="row">
+  <div class="col-md-4">
  <div id="search">
      <input data-bind="value: query, valueUpdate: 'keyup'" autocomplete="off" type="text" class="form-control" placeholder="Filter Locations">
 
@@ -31,20 +43,17 @@
                 <!-- <img data-bind"attr:{src: streetview}"/> -->
     </div>
 
+
+
+      <div class="wikipedia-container">
+        <h3 id="wikipedia-header">Relevant Wikipedia Links</h3>
+        <ul id="wikipedia-links"></ul>
+    </div>
+    </div>
+    <div></div>
+  <div class="col-md-8">
     <div id="map"></div>
-    <div>
-    <img src ="https://maps.googleapis.com/maps/api/streetview?size=600x300&location=40.779345,-73.980686&heading=1&pitch=-0.75&key=AIzaSyATolub07wwdNH-A_gYvcjBVB9W7m_ovdM">
+     </div>
     </div>
- <div>
-  <!-- <img width="16px" height="16px" data-bind="attr : {src: imagePath}" /> -->
-    </div>
-
-
-   <!--  <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2rPn2KX3smbe_H3HfqbSW8vU1Wrz_VfU&callback=initMap">
-    </script>
-    <script async src="MApp.js"></script>
-    <script type='text/javascript' src='knockout-3.4.2.js'></script> -->
-
   </body>
 </html>

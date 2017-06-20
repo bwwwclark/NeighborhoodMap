@@ -8,6 +8,34 @@
 
 //Model:
 
+var $wikiElem = $('#wikipedia-links');
+function loadData(){
+
+var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=New York&format=json&callback=wikiCallback';
+var wikiRequestTimeout = setTimeout(function(){
+    $wikiElem.text("failed to get wikiepedia resources");
+}, 8000);
+
+$.ajax({
+    url: wikiUrl,
+    dataType: "jsonp",
+    jsonp: "callback",
+    success: function( response ) {
+        var articleList = response[1];
+        console.log(response);
+
+    for (var i = 0; i < articleList.length; i++){
+        articleStr = articleList[i];
+        console.log(articleStr);
+        var url = 'http://en.wikipedia.org/wiki/' + articleStr;
+        $wikiElem.append('<li><a href="' + url + '">'+ articleStr +'</a></li>');
+    };
+    clearTimeout(wikiRequestTimeout);
+    }
+});
+return false
+};
+
 var Pin = function Pin(map, name, position, text, streetview) {
   var marker;
 
@@ -15,11 +43,27 @@ var Pin = function Pin(map, name, position, text, streetview) {
   this.position = ko.observable(position);
   this.text = ko.observable(text);
   this.streetView = ko.observable(streetview);
-  marker = new google.maps.Marker({
-    position: position,//new google.maps.LatLng(lat, lon),
-    animation: google.maps.Animation.DROP
+  //this.text = text;
+
+  infowindow = new google.maps.InfoWindow({
+    content: name
   });
 
+
+
+  marker = new google.maps.Marker({
+    position: position,//new google.maps.LatLng(lat, lon),
+    animation: google.maps.Animation.DROP,
+    title: name
+
+  });
+
+ 
+
+  marker.addListener('click', function() {
+    infowindow.setContent(name);
+    infowindow.open(map, marker);
+  });
   this.isVisible = ko.observable(false);
 
   this.isVisible.subscribe(function(currentState) {
@@ -31,6 +75,8 @@ var Pin = function Pin(map, name, position, text, streetview) {
   });
 
   this.isVisible(true);
+  console.log(name)
+
 };
 
 var Filter = function(){
@@ -57,16 +103,16 @@ var markers = [
         position: {lat: 40.779345, lng: -73.980686},
         lat: 40.779345,
         long: -73.980686,
-        streetView: "https://maps.googleapis.com/maps/api/streetview?size=600x300&location=40.779345,-73.980686&heading=1&pitch=-0.75&scale=2&key=AIzaSyATolub07wwdNH-A_gYvcjBVB9W7m_ovdM",
+        streetView: "https://maps.googleapis.com/maps/api/streetview?size=300x200&location=40.779345,-73.980686&heading=1&pitch=-0.75&scale=2&key=AIzaSyATolub07wwdNH-A_gYvcjBVB9W7m_ovdM",
         map: map,
-        text: ""
+        text: "is a large Apartment "
         },
      {
         name: "boxKite",
         position: {lat: 40.777625, lng: -73.980028},
         lat: 40.777625,
         long: -73.980028,
-        streetView: "https://maps.googleapis.com/maps/api/streetview?size=600x300&location=40.777625,-73.980028&heading=1&pitch=-0.75&&scale=1key=AIzaSyATolub07wwdNH-A_gYvcjBVB9W7m_ovdM",
+        streetView: "https://maps.googleapis.com/maps/api/streetview?size=300x200&location=40.777625,-73.980028&heading=1&pitch=-0.75&&scale=1key=AIzaSyATolub07wwdNH-A_gYvcjBVB9W7m_ovdM",
         map: map,
         text: ""
     },
@@ -76,9 +122,9 @@ var markers = [
         position: {lat: 40.774975, lng: -73.981640},
         lat: 40.774975,
         long: -73.981640,
-        streetView: "https://maps.googleapis.com/maps/api/streetview?size=600x300&location=40.774975,-73.981640&heading=1&pitch=-0.75&key=AIzaSyATolub07wwdNH-A_gYvcjBVB9W7m_ovdM",
+        streetView: "https://maps.googleapis.com/maps/api/streetview?size=300x200&location=40.774975,-73.981640&heading=1&pitch=-0.75&key=AIzaSyATolub07wwdNH-A_gYvcjBVB9W7m_ovdM",
         map: map,
-        text: ""
+        text: "abbbbbbb qqq"
     }];
 
 ///Yelp Model
@@ -114,4 +160,4 @@ function viewModel() {
 
       };
 ko.applyBindings(new viewModel());
-
+loadData();
